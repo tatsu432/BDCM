@@ -3,6 +3,6 @@
 
 This is the implementation of the Backdoor Criterion-based Diffusion-based Causal Model (BDCM). 
 
-See BDCM_Example_simple_SCM.ipynb for the Example 9
+See BDCM_simple_SCM.ipynb for the Example 9
 
-See BDCM_Example_complex_SCM.ipynb for the Example 10
+See BDCM_complex_SCM.ipynb for the Example 10
