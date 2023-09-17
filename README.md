@@ -3,7 +3,7 @@
 #### Name: Tatsuhiro Shimizu
 #### Affiliation: Waseda University Department of Political Science and Economics, Shinjuku, Tokyo, Japan, 
 #### ORCID: 0009-0009-9746-3346
-#### email: t.shimizu432@akane.waseda.jp
+#### E-mail: t.shimizu432@akane.waseda.jp
 
 This is the implementation of the Backdoor Criterion-based Diffusion-based Causal Model (BDCM). 
 
