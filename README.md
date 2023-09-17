@@ -1,8 +1,9 @@
 ## Dissusion Model in Causal Inference with Unmeasured Confounders
-## 2023 IEEE Symposium Series on Computational Intelligence
+### in Proceedings of the 2023 IEEE Symposium Series on Computational Intelligence, in press
 ### Tatsuhiro Shimizu
 ### Waseda University Department of Political Science and Economics, Shinjuku, Tokyo, Japan, 
 ### ORCID: 0009-0009-9746-3346
+### email: t.shimizu432@akane.waseda.jp
 
 This is the implementation of the Backdoor Criterion-based Diffusion-based Causal Model (BDCM). 
 
