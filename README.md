@@ -1,19 +1,60 @@
-## Dissusion Model in Causal Inference with Unmeasured Confounders
-#### in Proceedings of the 2023 IEEE Symposium Series on Computational Intelligence
-- Author: Tatsuhiro Shimizu
--  Affiliation: Waseda University Department of Political Science and Economics, Shinjuku, Tokyo, Japan,
--   ORCID: 0009-0009-9746-3346
--   E-mail: t.shimizu432@akane.waseda.jp
--   arXiv preprint: https://arxiv.org/abs/2308.03669
--   Abstract: We study how to extend the use of the diffusion model to answer the causal question from the observational data under the existence of unmeasured confounders. In Pearl's framework of using a Directed Acyclic Graph (DAG) to capture the causal intervention, a Diffusion-based Causal Model (DCM) was proposed incorporating the diffusion model to answer the causal questions more accurately, assuming that all of the confounders are observed. However, unmeasured confounders in practice exist, which hinders DCM from being applicable. To alleviate this limitation of DCM, we propose an extended model called Backdoor Criterion based DCM (BDCM), whose idea is rooted in the Backdoor criterion to find the variables in DAG to be included in the decoding process of the diffusion model so that we can extend DCM to the case with unmeasured confounders. Synthetic data experiment demonstrates that our proposed model captures the counterfactual distribution more precisely than DCM under the unmeasured confounders.
+# Dissusion Model in Causal Inference with Unmeasured Confounders
+
+This repository is for the exeriment conducted in ["Dissusion Model in Causal Inference with Unmeasured Confounders"](https://arxiv.org/abs/2308.03669) ([IEEE SSCI 2023](https://attend.ieee.org/ssci-2023/))" by [Tatsuhiro Shimizu](https://ss1.xrea.com/tshimizu.s203.xrea.com/works/index.html).
+
+## Abstract
+
+We study how to extend the use of the diffusion model to answer the causal question from the observational data under the existence of unmeasured confounders. In Pearl's framework of using a Directed Acyclic Graph (DAG) to capture the causal intervention, a [Diffusion-based Causal Model (DCM)](https://arxiv.org/abs/2302.00860) was proposed incorporating the diffusion model to answer the causal questions more accurately, assuming that all of the confounders are observed. However, unmeasured confounders in practice exist, which hinders DCM from being applicable. To alleviate this limitation of DCM, we propose an extended model called Backdoor Criterion based DCM (BDCM), whose idea is rooted in the Backdoor criterion to find the variables in DAG to be included in the decoding process of the diffusion model so that we can extend DCM to the case with unmeasured confounders. Synthetic data experiment demonstrates that our proposed model captures the counterfactual distribution more precisely than DCM under the unmeasured confounders.
+
+## Citation
+
+```
+@article{shimizu2023diffusion,
+  title={Diffusion Model in Causal Inference with Unmeasured Confounders},
+  author={Shimizu, Tatsuhiro},
+  journal={arXiv preprint arXiv:2308.03669},
+  year={2023}
+}
+```
 
 
-This is the implementation of the Backdoor Criterion-based Diffusion-based Causal Model (BDCM).
+## Requirements and Setup
+```bash
+# clone the repository
+git clone https://github.com/tatsu432/BDCM
+```
 
-- See SCM1_simple_structural_equations.ipynb for Example 10.
+The versions of Python and necessary packages are specified as follows.
 
-- See SCM1_complex_structural_equations.ipynb for Example 11.
+```
+[tool.poetry.dependencies]
+python = ">=3.9,<3.10"
+obp = "0.5.5"
+scikit-learn = "1.0.2"
+pandas = "1.3.5"
+scipy = "1.7.3"
+numpy = "^1.22.4"
+matplotlib = "^3.5.2"
+seaborn = "^0.11.2"
+hydra-core = "1.0.7"
+```
 
-- See SCM2_simple_structural_equations.ipynb for Example 12.
 
-- See SCM2_complex_structural_equations.ipynb for Example 13.
+### Section 4: Synthetic Data Experiment
+```
+# How does BDCM perform in comparison with DCM under the existence of unmeasured confounders?
+
+# Exapmle 10 (Figure 4 and simple structural equations)
+SCM1_simple_structural_equations.ipynb
+
+# Exapmle 11 (Figure 4 and complex structural equations)
+SCM1_complex_structural_equations.ipynb
+
+# Exapmle 12 (Figure 5 and simple structural equations)
+SCM2_simple_structural_equations.ipynb
+
+# Exapmle 13 (Figure 5 and complex structural equations)
+SCM2_complex_structural_equations.ipynb
+
+```
+
