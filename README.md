@@ -43,18 +43,36 @@ hydra-core = "1.0.7"
 ### Section 4: Synthetic Data Experiment
 ```
 # How does BDCM perform in comparison with DCM under the existence of unmeasured confounders?
+```
 
+##### Figure 4
+
+<img width="400" alt="Figure4" src="https://github.com/tatsu432/BDCM/assets/80372303/0c21e1e3-c95d-4953-a43b-21e59654bfab">
+
+
+```
 # Exapmle 10 (Figure 4 and simple structural equations)
 SCM1_simple_structural_equations.ipynb
+```
 
+```
 # Exapmle 11 (Figure 4 and complex structural equations)
 SCM1_complex_structural_equations.ipynb
+```
 
+##### Figure 5
+
+<img width="524" alt="Figure5" src="https://github.com/tatsu432/BDCM/assets/80372303/b9bcad4a-a728-4f47-b908-261885e017c1">
+
+
+```
 # Exapmle 12 (Figure 5 and simple structural equations)
 SCM2_simple_structural_equations.ipynb
+```
 
+
+```
 # Exapmle 13 (Figure 5 and complex structural equations)
 SCM2_complex_structural_equations.ipynb
-
 ```
 
