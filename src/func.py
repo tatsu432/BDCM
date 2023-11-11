@@ -27,6 +27,41 @@ def set_seed(s):
   torch.backends.cudnn.deterministic = True
 
 
+
+# Define the decoder
+# Dec_i(Z_i, X_{pa_i})
+# Input: exogenous node, array of parent nodes, and the index of the order NN was created
+# Output: the last node in the reverse diffusion process
+def DEC(x_parents, index_order, array_net_x):
+
+    # Define the vector that preserves the variables obtained via the reverse diffusion process
+    x_hat = np.zeros(conf.T + 1)
+    # Initialize the start node of the reverse diffusion process
+    x_hat[conf.T] = np.random.normal(0, 1)
+    # Save the variables in the reverse diffusion process
+    for i in range(1, conf.T + 1):
+        t = conf.T + 1 - i
+
+        # Change the network mode to evaluation
+        array_net_x[index_order].eval()
+        # Define the inputs
+        # input_x = np.column_stack((np.array([x_hat[t]]), x_parents.T, np.array([t])))
+        input_x = np.append(np.array([x_hat[t]]), x_parents)
+        input_x = np.append(input_x, np.array([t]))
+        input_x = np.array([input_x])
+        # convert the input to tensor
+        input_x_tensor = torch.from_numpy(input_x).float()
+        # Make prediction
+        with torch.no_grad():
+            output_x_tensor = array_net_x[index_order](input_x_tensor)
+        # Convert the output to numpy data
+        output_x = output_x_tensor.data.numpy()
+        # Calculate the next variable in the reverse diffusion process by the formula
+        x_hat[t - 1] = np.sqrt(conf.alpha_t[t - 2] / conf.alpha_t[t - 1]) * x_hat[t] - output_x[0][0] * (np.sqrt(conf.alpha_t[t - 2] * (1 - conf.alpha_t[t - 1]) / conf.alpha_t[t - 1]) - np.sqrt(1 - conf.alpha_t[t - 2]))
+    # Return the last variable in the reverse diffusion process
+    return x_hat[0]
+
+
 def MMD(x, y, kernel):
     """Emprical maximum mean discrepancy. The lower the result
     the more evidence that distributions are the same.
