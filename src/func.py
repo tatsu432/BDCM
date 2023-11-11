@@ -4,6 +4,7 @@ import random
 import matplotlib.pyplot as plt
 import conf
 from nn import MakeDataset, Net_x
+import os
 
 array_title = ["DCM", "BDCM"]
 
@@ -216,7 +217,7 @@ def MMD(x, y, kernel):
 
 
 
-def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD, flag_print_each_MMD: bool = False):
+def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD, name_of_folder, s, flag_print_each_MMD: bool = False, flag_show_plot: bool = True):
   # Calculate the number of intervention values
   num_interventions = np.size(array_interventions)
 
@@ -230,6 +231,18 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
   for i in range(num_interventions):
     # Get the intervened value
     intervened_value_for_cause_node = array_interventions[i]
+
+    # カレントディレクトリのパスを取得
+    current_directory = os.getcwd()
+    # 1つ上のディレクトリのパスを取得
+    one_levels_up = os.path.abspath(os.path.join(current_directory, ".."))
+    # resultsフォルダのパスを作成
+    results_folder = os.path.join(one_levels_up, 'results')
+    # results1フォルダのパスを作成
+    target_folder = os.path.join(results_folder, f'results_{name_of_folder}')
+    # 保存先のフォルダを作成
+    os.makedirs(target_folder, exist_ok=True)
+
 
     # Show all the graphs and output MMD where we do(X_1 = x_1)
     figure, axis = plt.subplots(1, 2, figsize=(12, 5))
@@ -249,14 +262,20 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
         # 凡例を中央のプロットの真上に配置する
         figure.legend(
                 loc='upper center', 
-                bbox_to_anchor=(0.5, 1.05), 
+                bbox_to_anchor=(0.5, 1.025), 
                 ncol=2, 
                 fontsize = 15)
       # Calculate MMD
       mmd_value = MMD(torch.tensor([normalize(array_array_DCM_BDCM_samples[j][i])]).T.to(device), torch.tensor([normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u))[:conf.n_sample_DCM]]).T.to(device), "rbf")
       array_MMD_DCM_BDCM[j][i] = mmd_value.item()
-    plt.show()
-
+    # ファイルに保存
+    file_path = os.path.join(target_folder, f"s={s}_val={intervened_value_for_cause_node:.2}.png")
+    # plt.tight_layout()
+    # subplots_adjust()を呼び出してプロットの余白を調整
+    plt.subplots_adjust(top=0.9, bottom=0.1, left=0.1, right=0.9)
+    plt.savefig(file_path)
+    if flag_show_plot == True:
+      plt.show()
 
   # Output the mean and standard deviation of MMD for DCM and BDCM
   # loop for DCM or BDCM
