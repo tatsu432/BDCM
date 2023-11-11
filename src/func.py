@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 
 # Define the function to normalize
@@ -6,7 +7,7 @@ def normalize(x):
     return (x - np.mean(x)) / np.std(x)
 
 
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 
