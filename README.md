@@ -52,12 +52,12 @@ hydra-core = "1.0.7"
 
 ```
 # Exapmle 10 (Figure 4 and simple structural equations)
-SCM1_simple_structural_equations.ipynb
+SCM1_simple.ipynb
 ```
 
 ```
 # Exapmle 11 (Figure 4 and complex structural equations)
-SCM1_complex_structural_equations.ipynb
+SCM1_complex.ipynb
 ```
 
 ##### Figure 5
@@ -67,12 +67,59 @@ SCM1_complex_structural_equations.ipynb
 
 ```
 # Exapmle 12 (Figure 5 and simple structural equations)
-SCM2_simple_structural_equations.ipynb
+SCM2_simple.ipynb
 ```
 
 
 ```
 # Exapmle 13 (Figure 5 and complex structural equations)
-SCM2_complex_structural_equations.ipynb
+SCM2_complex.ipynb
+```
+
+##### Figure 6
+<img width="400" alt="SCM3" src="https://github.com/tatsu432/BDCM/assets/80372303/38fc72cf-418e-483e-982f-f91732ffdca0">
+
+
+
+```
+# Exapmle 14 (Figure 6 and simple structural equations)
+SCM3_simple.ipynb
+```
+
+
+```
+# Exapmle 15 (Figure 6 and complex structural equations)
+SCM3_complex.ipynb
+```
+
+##### Figure 7
+
+<img width="400" alt="SCM4" src="https://github.com/tatsu432/BDCM/assets/80372303/fee6d0c0-b817-4545-9728-3ebf47e73d96">
+
+
+```
+# Exapmle 16 (Figure 7 and simple structural equations)
+SCM4_simple.ipynb
+```
+
+
+```
+# Exapmle 17 (Figure 7 and complex structural equations)
+SCM4_complex.ipynb
+```
+
+##### Figure 8
+
+<img width="400" alt="SCM5" src="https://github.com/tatsu432/BDCM/assets/80372303/b1cb20bf-cc96-46df-b79b-418136dbfcc3">
+
+```
+# Exapmle 18 (Figure 8 and simple structural equations)
+SCM2_simple.ipynb
+```
+
+
+```
+# Exapmle 19 (Figure 8 and complex structural equations)
+SCM2_complex.ipynb
 ```
 
