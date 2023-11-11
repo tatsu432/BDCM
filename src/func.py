@@ -243,7 +243,7 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
 # Create the array that save the intervened value, samples from DCM, samples from BDCM
 # Input: array of intervened values
 # Output: DCM and BDCM samples
-def save_array(array_interventions, sample_outcome_do_cause_DCM, sample_outcome_do_cause_BDCM):
+def save_array(array_interventions, sample_outcome_do_cause_DCM, sample_outcome_do_cause_BDCM, x, array_net_x):
   # Get the number of interventions
   num_intervention = np.size(array_interventions)
 
@@ -255,14 +255,14 @@ def save_array(array_interventions, sample_outcome_do_cause_DCM, sample_outcome_
   for i in range(num_intervention):
     if np.any(array_DCM_samples) == False:
       # Plot the empirical distribution of DCM and true target
-      array_DCM_samples = np.append(array_DCM_samples, np.array([sample_outcome_do_cause_DCM(array_interventions[i])]))
+      array_DCM_samples = np.append(array_DCM_samples, np.array([sample_outcome_do_cause_DCM(array_interventions[i], x, array_net_x)]))
       # Plot the empirical distribution of BDCM and true target
-      array_BDCM_samples = np.append(array_BDCM_samples, np.array([sample_outcome_do_cause_BDCM(array_interventions[i])]))
+      array_BDCM_samples = np.append(array_BDCM_samples, np.array([sample_outcome_do_cause_BDCM(array_interventions[i], x, array_net_x)]))
     else:
       # Plot the empirical distribution of DCM and true target
-      array_DCM_samples = np.vstack((array_DCM_samples, np.array([sample_outcome_do_cause_DCM(array_interventions[i])])))
+      array_DCM_samples = np.vstack((array_DCM_samples, np.array([sample_outcome_do_cause_DCM(array_interventions[i], x, array_net_x)])))
       # Plot the empirical distribution of BDCM and true target
-      array_BDCM_samples = np.vstack((array_BDCM_samples, np.array([sample_outcome_do_cause_BDCM(array_interventions[i])])))
+      array_BDCM_samples = np.vstack((array_BDCM_samples, np.array([sample_outcome_do_cause_BDCM(array_interventions[i], x, array_net_x)])))
     array_array_DCM_BDCM_samples = np.array([array_DCM_samples, array_BDCM_samples])
 
   return array_array_DCM_BDCM_samples
