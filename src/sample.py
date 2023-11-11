@@ -1,7 +1,8 @@
 import numpy as np
 import conf
 
-def sample_array_u(d):
+def sample_array_u_and_x(d, structural_eq):
+    # Sample exogenous nodes U_i ~ N(mu, sigma)
     array_u = np.array([])
     for i in range(d):
         u = np.random.normal(conf.mu, conf.sigma, conf.n_obs)
@@ -9,4 +10,10 @@ def sample_array_u(d):
             array_u = u
         else:
             array_u = np.vstack((array_u, u))
-    return array_u
+
+    # Sample endogenous nodes X_i by the structural equations
+    x = np.zeros([d, conf.n_obs])
+    for i in range(d):
+        x[i] = structural_eq(array_u[i], i, x)
+    
+    return array_u, x
