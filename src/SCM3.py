@@ -28,19 +28,21 @@ plt.ioff()  # 対話モードを無効にする
 
 
 
-def SCM1(structural_eq, simple_or_complex):
+def SCM3(structural_eq, simple_or_complex):
 
-    name_of_folder = "SCM1"
+    name_of_folder = "SCM3"
 
     # Define the number of endogenous or exogenous variables in SCM
-    d = 5
-    # index for cause variable X_i = 2
-    ind_cause = 1
-    # index for result variable X_i = 5
-    ind_result = 4
-    # the array of the list of the indexes of the parent node in DAG
-    array_list_parent_ind = [[], [1], [1], [3], [2, 4]]
+    d = 7
 
+    # index for cause variable X_i = 6
+    ind_cause = 5
+
+    # index for result variable X_i = 7
+    ind_result = 6
+
+    # the array of the list of the indexes of the parent node in DAG
+    array_list_parent_ind = [[], [1], [1], [1], [3], [2, 4], [1, 5, 6]]
 
     # Define the function to sample X_4 n times when we intervene to X_1 in DCM
     # Input: the number of samples we want to obtain and the value of the intervention
@@ -51,15 +53,24 @@ def SCM1(structural_eq, simple_or_complex):
 
         # Iteratively sample from the target distribution
         for i in range(conf.n_sample_DCM):
-            # Set X_2 to the intervened value
-            x2_sampled = intervened_value
+            # Sample by the empirical distribution
+            x2_sampled = random.choice(x[1])
+            # Sample by the empirical distribution
             x3_sampled = random.choice(x[2])
+            # Sample by the empirical distribution
+            x4_sampled = random.choice(x[3])
             # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x5_parents = np.array([x2_sampled])
-            # Sample X_5 by using the decoder function
+            x5_parents = np.array([x3_sampled])
+            # Sample X_2 by using the decoder function
             x5_sampled = DEC(x5_parents, 0, array_net_x)
+            # Set X_4 to the intervened value
+            x6_sampled = intervened_value
+            # Concatenate the parents and nodes which satisfy the backdoor criterion
+            x7_parents = np.array([x5_sampled, x6_sampled])
+            # Sample X_2 by using the decoder function
+            x7_sampled = DEC(x7_parents, 1, array_net_x)
             # Add the sampled value to the list
-            x_outcome_DDIM_list[i] = x5_sampled
+            x_outcome_DDIM_list[i] = x7_sampled
 
         return x_outcome_DDIM_list
 
@@ -73,32 +84,38 @@ def SCM1(structural_eq, simple_or_complex):
 
         # Iteratively sample from the target distribution
         for i in range(conf.n_sample_DCM):
-            # Set X_2 to the intervened value
-            x2_sampled = intervened_value
+            # Sample by the empirical distribution
+            x2_sampled = random.choice(x[1])
+            # Sample by the empirical distribution
             x3_sampled = random.choice(x[2])
+            # Sample by the empirical distribution
+            x4_sampled = random.choice(x[3])
             # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x5_parents = np.array([x2_sampled, x3_sampled])
-            # Sample X_5 by using the decoder function
-            x5_sampled = DEC(x5_parents, 1, array_net_x)
+            x5_parents = np.array([x3_sampled])
+            # Sample X_2 by using the decoder function
+            x5_sampled = DEC(x5_parents, 0, array_net_x)
+            # Set X_4 to the intervened value
+            x6_sampled = intervened_value
+            # Concatenate the parents and nodes which satisfy the backdoor criterion
+            x7_parents = np.array([x2_sampled, x3_sampled, x4_sampled, x6_sampled])
+            # Sample X_2 by using the decoder function
+            x7_sampled = DEC(x7_parents, 2, array_net_x)
             # Add the sampled value to the list
-            x_outcome_DDIM_list[i] = x5_sampled
+            x_outcome_DDIM_list[i] = x7_sampled
 
         return x_outcome_DDIM_list
-
 
     # Initialized the array to save the output of each iterations over seeds
     array_array_MMD = []
     array_title = ["DCM", "BDCM"]
 
     for s in tqdm(range(conf.num_seeds)):
-
         # Set the seed
         set_seed(s)
 
         # Define the array of interneved values
         # 10 interventinos with the intervened value ranging from -3 to 3 linearly
         array_interventions = np.random.uniform(conf.lowest_intervention, conf.highest_intervention, conf.num_interventions)
-
 
         # # Sample exogenous nodes U_i ~ N(mu, sigma)
         # # Sample endogenous nodes X_i by the structural equations
@@ -112,22 +129,21 @@ def SCM1(structural_eq, simple_or_complex):
         alpha_t_train_for_x = create_alpha_t_train_for_x(d, t_for_x)
 
 
-        # Create the input for the neural network
-
         # the nodes for which we use DEC
-        array_titles = np.array(["X_5 (DCM)", "X_5 (BDCM)"])
+        array_titles = np.array(["X_5", "X_7 (DCM)", "X_7 (BDCM)"])
 
         # Define the array of the index for epsilon for the neural networks (index - 1)
-        array_index_for_epsilon = np.array([4, 4])
+        array_index_for_epsilon = np.array([4, 6, 6])
 
         # Define the array of the numbers of the inputs for the neural networks (2 + number of parents or adjustment set)
-        array_num_input_for_nn = np.array([3, 4])
+        array_num_input_for_nn = np.array([3, 4, 6])
 
         # Define the array of the parents or the adjustment set for each DEC (index - 1)
-        parent = [[1], [1, 3]]
+        parent = [[2], [4, 5], [1, 2, 3, 5]]
 
         # Create the input for neural network
         array_input_x = create_input_for_NN(array_num_input_for_nn, array_index_for_epsilon, alpha_t_train_for_x, x, epsilon_for_x, parent, t_for_x)
+
 
         # """Train the Neural Network"""
         array_net_x = train_and_plot_neural_net(array_input_x, epsilon_for_x, array_index_for_epsilon, array_num_input_for_nn, array_titles, conf.flag_plot_nn_train)
@@ -137,6 +153,5 @@ def SCM1(structural_eq, simple_or_complex):
         array_array_DCM_BDCM_samples = save_array(array_interventions, sample_outcome_do_cause_DCM, sample_outcome_do_cause_BDCM, x, array_net_x)
 
         create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD, name_of_folder, s, simple_or_complex, conf.flag_print_each_MMD, conf.flag_show_plot)
-
 
     calculate_overall_MMD(array_array_MMD)
