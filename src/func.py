@@ -27,6 +27,14 @@ def set_seed(s):
   torch.backends.cudnn.benchmark = False
   torch.backends.cudnn.deterministic = True
 
+def create_alpha_t_train_for_x(d, t_for_x):
+  # Get the alpha_t for training
+  # Initialize the alpha_t
+  alpha_t_train_for_x = np.zeros((d, conf.n_obs))
+  for i in range(conf.n_obs):
+    for j in range(d):
+      alpha_t_train_for_x[j][i] = conf.alpha_t[t_for_x[j][i] - 1]
+  return alpha_t_train_for_x
 
 # Define the function to create the first input to the neural network
 def create_input_1(alpha_t, x, epsilon):
