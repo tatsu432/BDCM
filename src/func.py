@@ -287,3 +287,20 @@ def save_array(array_interventions, sample_outcome_do_cause_DCM, sample_outcome_
     array_array_DCM_BDCM_samples = np.array([array_DCM_samples, array_BDCM_samples])
 
   return array_array_DCM_BDCM_samples
+
+
+
+
+def calculate_overall_MMD(array_array_MMD):
+  all_MMD_DCM = np.array([])
+  all_MMD_BDCM = np.array([])
+  for i in range(conf.num_seeds):
+    all_MMD_DCM = np.append(all_MMD_DCM, array_array_MMD[i][0])
+    all_MMD_BDCM = np.append(all_MMD_BDCM, array_array_MMD[i][1])
+
+  all_MMD_DCM_BDCM = [all_MMD_DCM, all_MMD_BDCM]
+  # Output the mean and standard deviation of MMD for DCM and BDCM
+  # loop for DCM or BDCM
+  for i in range(2):
+      print("mean of all MMD for {}: {:.3}".format(array_title[i], np.mean(all_MMD_DCM_BDCM[i])))
+      print("standard deviation of all MMD for {}: {:.3}".format(array_title[i], np.std(all_MMD_DCM_BDCM[i])))
