@@ -17,3 +17,19 @@ def sample_array_u_and_x(d, structural_eq):
         x[i] = structural_eq(array_u[i], i, x)
     
     return array_u, x
+
+
+
+
+
+
+
+# Define the function to sample when we intervene in nodes
+def true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u):
+  x_do = np.zeros([d, conf.n_obs])
+  for i in range(d):
+     if i == ind_cause:
+        x_do[i] = np.ones(conf.n_obs) * intervened_value_for_cause_node
+     else:
+        x_do[i] = structural_eq(array_u[i], i, x_do)
+  return x_do[ind_result]
