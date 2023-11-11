@@ -28,6 +28,11 @@ def set_seed(s):
   torch.backends.cudnn.deterministic = True
 
 
+# Define the function to create the first input to the neural network
+def create_input_1(alpha_t, x, epsilon):
+    return np.sqrt(alpha_t) * x + np.sqrt(1 - alpha_t) * epsilon
+
+
 
 # Define the decoder
 # Dec_i(Z_i, X_{pa_i})
