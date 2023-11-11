@@ -55,10 +55,13 @@ hydra-core = "1.0.7"
 SCM1_simple.ipynb
 ```
 
+<img width="400" alt="SCM1 simple" src="results/res_SCM1_simp.png">
+
 ```
 # Exapmle 11 (Figure 4 and complex structural equations)
 SCM1_complex.ipynb
 ```
+<img width="400" alt="SCM1 comlex" src="results/res_SCM1_comp.png">
 
 ##### Figure 5
 
@@ -69,12 +72,13 @@ SCM1_complex.ipynb
 # Exapmle 12 (Figure 5 and simple structural equations)
 SCM2_simple.ipynb
 ```
-
+<img width="400" alt="SCM2 simple" src="results/res_SCM2_simp.png">
 
 ```
 # Exapmle 13 (Figure 5 and complex structural equations)
 SCM2_complex.ipynb
 ```
+<img width="400" alt="SCM2 comlex" src="results/res_SCM2_comp.png">
 
 ##### Figure 6
 <img width="400" alt="SCM3" src="https://github.com/tatsu432/BDCM/assets/80372303/38fc72cf-418e-483e-982f-f91732ffdca0">
@@ -85,12 +89,14 @@ SCM2_complex.ipynb
 # Exapmle 14 (Figure 6 and simple structural equations)
 SCM3_simple.ipynb
 ```
+<img width="400" alt="SCM3 simple" src="results/res_SCM3_simp.png">
 
 
 ```
 # Exapmle 15 (Figure 6 and complex structural equations)
 SCM3_complex.ipynb
 ```
+<img width="400" alt="SCM3 comlex" src="results/res_SCM3_comp.png">
 
 ##### Figure 7
 
@@ -116,10 +122,11 @@ SCM4_complex.ipynb
 # Exapmle 18 (Figure 8 and simple structural equations)
 SCM2_simple.ipynb
 ```
-
+<img width="400" alt="SCM5 simple" src="results/res_SCM5_simp.png">
 
 ```
 # Exapmle 19 (Figure 8 and complex structural equations)
 SCM2_complex.ipynb
 ```
+<img width="400" alt="SCM5 comlex" src="results/res_SCM5_comp.png">
 
