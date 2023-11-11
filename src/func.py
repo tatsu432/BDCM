@@ -258,10 +258,6 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
 
 
 
-  
-
-
-
 # Create the array that save the intervened value, samples from DCM, samples from BDCM
 # Input: array of intervened values
 # Output: DCM and BDCM samples
