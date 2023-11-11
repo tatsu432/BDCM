@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import random
 
 
 # Define the function to normalize
@@ -9,6 +10,18 @@ def normalize(x):
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
+def set_seed(s):
+  # Set random seed for random
+  random.seed(s)
+  # Set random seed for NumPy
+  np.random.seed(s)
+  # Set random seed for PyTorch
+  torch.manual_seed(s)
+  if torch.cuda.is_available():
+      torch.cuda.manual_seed_all(s)
+  torch.backends.cudnn.benchmark = False
+  torch.backends.cudnn.deterministic = True
 
 
 def MMD(x, y, kernel):
