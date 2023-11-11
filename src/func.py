@@ -216,7 +216,7 @@ def MMD(x, y, kernel):
 
 
 
-def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD):
+def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD, flag_print_each_MMD: bool = False):
   # Calculate the number of intervention values
   num_interventions = np.size(array_interventions)
 
@@ -248,9 +248,10 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
 
   # Output the mean and standard deviation of MMD for DCM and BDCM
   # loop for DCM or BDCM
-  for i in range(2):
-      print("mean of MMD for {}: {:.3}".format(array_title[i], np.mean(array_MMD_DCM_BDCM[i])))
-      print("standard deviation of MMD for {}: {:.3}".format(array_title[i], np.std(array_MMD_DCM_BDCM[i])))
+  if flag_print_each_MMD == True:
+    for i in range(2):
+        print("mean of MMD for {}: {:.3}".format(array_title[i], np.mean(array_MMD_DCM_BDCM[i])))
+        print("standard deviation of MMD for {}: {:.3}".format(array_title[i], np.std(array_MMD_DCM_BDCM[i])))
 
 
   array_array_MMD.append(array_MMD_DCM_BDCM)

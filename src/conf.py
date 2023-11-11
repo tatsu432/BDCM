@@ -51,3 +51,4 @@ for i in range(len(beta_t)):
 
 
 flag_plot_nn_train = False
+flag_print_each_MMD = True
