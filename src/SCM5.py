@@ -28,21 +28,21 @@ plt.ioff()  # 対話モードを無効にする
 
 
 
-def SCM4(structural_eq, simple_or_complex):
+def SCM5(structural_eq, simple_or_complex):
 
-    name_of_folder = "SCM4"
+    name_of_folder = "SCM5"
 
     # Define the number of endogenous or exogenous variables in SCM
-    d = 10
+    d = 11
 
     # index for cause variable X_i = 9
     ind_cause = 8
 
-    # index for result variable X_i = 10
-    ind_result = 9
+    # index for result variable X_i = 11
+    ind_result = 10
 
     # the array of the list of the indexes of the parent node in DAG
-    array_list_parent_ind = [[], [], [1], [2], [3], [4], [3], [4], [5, 8], [6, 7, 9]]
+    array_list_parent_ind = [[], [1], [2], [2], [1], [5], [6], [6], [1, 5], [9], [3, 4, 7, 8, 10]]
 
     # Define the function to sample X_4 n times when we intervene to X_1 in DCM
     # Input: the number of samples we want to obtain and the value of the intervention
@@ -54,25 +54,21 @@ def SCM4(structural_eq, simple_or_complex):
         # Iteratively sample from the target distribution
         for i in range(conf.n_sample_DCM):
             # Sample by the empirical distribution
-            x3_sampled = random.choice(x[2])
+            x2_sampled = random.choice(x[1])
             # Sample by the empirical distribution
-            x4_sampled = random.choice(x[3])
-            # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x7_parents = np.array([x3_sampled])
-            # Sample X_7 by using the decoder function
-            x7_sampled = DEC(x7_parents, 0, array_net_x)
-            # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x8_parents = np.array([x4_sampled])
-            # Sample X_8 by using the decoder function
-            x8_sampled = DEC(x8_parents, 1, array_net_x)
+            x6_sampled = random.choice(x[5])
             # Set X_9 to the intervened value
             x9_sampled = intervened_value
             # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x10_parents = np.array([x7_sampled, x9_sampled])
-            # Sample X_2 by using the decoder function
-            x10_sampled = DEC(x10_parents, 2, array_net_x)
+            x10_parents = np.array([x9_sampled])
+            # Sample X_10 by using the decoder function
+            x10_sampled = DEC(x10_parents, 0, array_net_x)
+            # Concatenate the parents and nodes which satisfy the backdoor criterion
+            x11_parents = np.array([x9_sampled, x10_sampled])
+            # Sample X_11 by using the decoder function
+            x11_sampled = DEC(x11_parents, 1, array_net_x)
             # Add the sampled value to the list
-            x_outcome_DDIM_list[i] = x10_sampled
+            x_outcome_DDIM_list[i] = x11_sampled
 
         return x_outcome_DDIM_list
 
@@ -87,25 +83,21 @@ def SCM4(structural_eq, simple_or_complex):
         # Iteratively sample from the target distribution
         for i in range(conf.n_sample_DCM):
             # Sample by the empirical distribution
-            x3_sampled = random.choice(x[2])
+            x2_sampled = random.choice(x[1])
             # Sample by the empirical distribution
-            x4_sampled = random.choice(x[3])
-            # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x7_parents = np.array([x3_sampled])
-            # Sample X_7 by using the decoder function
-            x7_sampled = DEC(x7_parents, 0, array_net_x)
-            # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x8_parents = np.array([x4_sampled])
-            # Sample X_8 by using the decoder function
-            x8_sampled = DEC(x8_parents, 1, array_net_x)
+            x6_sampled = random.choice(x[5])
             # Set X_9 to the intervened value
             x9_sampled = intervened_value
             # Concatenate the parents and nodes which satisfy the backdoor criterion
-            x10_parents = np.array([x3_sampled, x4_sampled, x9_sampled])
-            # Sample X_2 by using the decoder function
-            x10_sampled = DEC(x10_parents, 3, array_net_x)
+            x10_parents = np.array([x9_sampled])
+            # Sample X_10 by using the decoder function
+            x10_sampled = DEC(x10_parents, 0, array_net_x)
+            # Concatenate the parents and nodes which satisfy the backdoor criterion
+            x11_parents = np.array([x2_sampled, x6_sampled, x9_sampled, x10_sampled])
+            # Sample X_11 by using the decoder function
+            x11_sampled = DEC(x11_parents, 2, array_net_x)
             # Add the sampled value to the list
-            x_outcome_DDIM_list[i] = x10_sampled
+            x_outcome_DDIM_list[i] = x11_sampled
 
         return x_outcome_DDIM_list
 
@@ -133,16 +125,16 @@ def SCM4(structural_eq, simple_or_complex):
 
 
         # the nodes for which we use DEC
-        array_titles = np.array(["X_7", "X_8", "X_{10} (DCM)", "X_{10} (BDCM)"])
+        array_titles = np.array(["X_{10}", "X_{11} (DCM)", "X_{11} (BDCM)"])
 
         # Define the array of the index for epsilon for the neural networks (index - 1)
-        array_index_for_epsilon = np.array([6, 7, 9, 9])
+        array_index_for_epsilon = np.array([9, 10, 10])
 
         # Define the array of the numbers of the inputs for the neural networks (2 + number of parents or adjustment set)
-        array_num_input_for_nn = np.array([3, 3, 4, 5])
+        array_num_input_for_nn = np.array([3, 4, 6])
 
         # Define the array of the parents or the adjustment set for each DEC (index - 1)
-        parent = [[2], [3], [6, 8], [2, 3, 8]]
+        parent = [[8], [8, 9], [1, 5, 8, 9]]
 
         # Create the input for neural network
         array_input_x = create_input_for_NN(array_num_input_for_nn, array_index_for_epsilon, alpha_t_train_for_x, x, epsilon_for_x, parent, t_for_x)

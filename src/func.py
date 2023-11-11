@@ -254,7 +254,7 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
       axis[j].hist(normalize(array_array_DCM_BDCM_samples[j][i]), 100, density = True, label = "sample")
       # Plot ground truth samples
       axis[j].hist(normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u)), 100, density = True, alpha = 0.5, label = "target dist")
-      axis[j].set_xlabel(f"$X_{ind_result + 1}|do(X_{ind_cause + 1} = {intervened_value_for_cause_node:.4})$", fontsize = 15)
+      axis[j].set_xlabel(f"$X_{'{' + str(ind_result + 1) + '}'}|do(X_{ '{' + str(ind_cause + 1) + '}'} = {intervened_value_for_cause_node:.4})$", fontsize = 15)
       axis[j].set_ylabel(f"frequency", fontsize = 15)
       axis[j].set_title(f"{array_title[j]}", fontsize = 15)
       axis[j].legend().set_visible(False)  
