@@ -3,6 +3,7 @@ import torch
 import random
 import matplotlib.pyplot as plt
 import conf
+from nn import MakeDataset, Net_x
 
 array_title = ["DCM", "BDCM"]
 
@@ -60,6 +61,80 @@ def DEC(x_parents, index_order, array_net_x):
         x_hat[t - 1] = np.sqrt(conf.alpha_t[t - 2] / conf.alpha_t[t - 1]) * x_hat[t] - output_x[0][0] * (np.sqrt(conf.alpha_t[t - 2] * (1 - conf.alpha_t[t - 1]) / conf.alpha_t[t - 1]) - np.sqrt(1 - conf.alpha_t[t - 2]))
     # Return the last variable in the reverse diffusion process
     return x_hat[0]
+
+
+
+
+
+def train_and_plot_neural_net(array_input_x, epsilon_for_x, array_index_for_epsilon, array_num_input_for_nn, array_titles):
+  """Train the Neural Network"""
+
+  # Train the neural network that will be used for the decoding process
+  # Initialize the array that save the trained nets and the losses
+  array_net_x = np.array([])
+  array_epoch_loss = np.array([])
+
+  # loop for the neural net
+  for i in range(len(array_input_x)):
+    # Prepare dataset
+    dataset = MakeDataset(array_input_x[i], epsilon_for_x[array_index_for_epsilon[i]].reshape(-1, 1))
+    dataloader = torch.utils.data.DataLoader(dataset, batch_size=conf.batch_size, shuffle=True)
+
+    # Prepare model and training parameters
+    # Instantiate the Neural Network
+    net = Net_x(array_num_input_for_nn[i])
+    # Chnage the Neural Network to the training mode
+    net.train()
+    # Define the optimizer
+    optimizer = torch.optim.Adam(net.parameters(), lr=conf.learning_rate)
+    # Define the criterion
+    criterion = torch.nn.MSELoss()
+
+    # Training
+    epoch_loss = []
+    for epoch in range(conf.num_epochs):
+      # use 'dataloader' to start batch learning
+      running_loss = 0   # loss in this epoch
+      for inputs, labels in dataloader:
+          outputs = net(inputs)
+          loss = criterion(outputs, labels)
+          optimizer.zero_grad()
+          loss.backward()
+          optimizer.step()
+          # add loss of this batch to loss of epoch
+          running_loss += loss.data.numpy().tolist()
+
+      epoch_loss.append(running_loss)
+
+    # Append the trained net and loss to the array
+    if i == 0:
+      array_net_x = net
+      array_epoch_loss = epoch_loss
+    else:
+      array_net_x = np.append(array_net_x, net)
+      array_epoch_loss = np.vstack((array_epoch_loss, epoch_loss))
+
+  """Plot the loss of the training over the epoch"""
+
+  num_neural_net = len(array_epoch_loss)
+
+  # for loop over the neural network
+  for i in range(num_neural_net):
+    # Plot the loss over the epoch
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.plot(list(range(len(array_epoch_loss[i]))), array_epoch_loss[i])
+    ax.set_xlabel('number of epochs')
+    ax.set_ylabel('loss')
+    ax.set_yscale('log')
+    ax.set_title('${}$'.format(array_titles[i]))
+    fig.show()
+
+  return array_net_x
+
+
+
+
 
 
 def MMD(x, y, kernel):
