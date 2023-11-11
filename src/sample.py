@@ -1,5 +1,6 @@
 import numpy as np
 import conf
+import random
 
 def sample_array_u_and_x(d, structural_eq):
     # Sample exogenous nodes U_i ~ N(mu, sigma)
@@ -17,6 +18,23 @@ def sample_array_u_and_x(d, structural_eq):
         x[i] = structural_eq(array_u[i], i, x)
     
     return array_u, x
+
+
+def sample_t_and_eps_for_x(d):
+  # Generate t ~ Unif([T])
+  # Generate \epsilon ~ N(mu, sigma)
+  t_for_x = np.array([])
+  epsilon_for_x = np.array([])
+  for i in range(d):
+    t = np.array([random.randint(1, conf.T) for x in range(conf.n_obs)])
+    epsilon = np.random.normal(conf.mu, conf.sigma, conf.n_obs)
+    if i == 0:
+      t_for_x = t
+      epsilon_for_x = epsilon
+    else:
+      t_for_x = np.vstack((t_for_x, t))
+      epsilon_for_x = np.vstack((epsilon_for_x, epsilon))
+  return t_for_x, epsilon_for_x
 
 
 
