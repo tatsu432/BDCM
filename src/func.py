@@ -79,7 +79,27 @@ def DEC(x_parents, index_order, array_net_x):
 
 
 
-def train_and_plot_neural_net(array_input_x, epsilon_for_x, array_index_for_epsilon, array_num_input_for_nn, array_titles):
+def create_input_for_NN(array_num_input_for_nn, array_index_for_epsilon, alpha_t_train_for_x, x, epsilon_for_x, parent, t_for_x):
+  # Define the number of neural network
+  num_neural_net = len(array_num_input_for_nn)
+
+  # Initialize the input to be used for the training
+  array_input_x = []
+
+  # loop for the number of neural network
+  for i in range(num_neural_net):
+    # First input by using the predefined function
+    ind = array_index_for_epsilon[i]
+    fisrt_input = create_input_1(alpha_t_train_for_x[ind], x[ind], epsilon_for_x[ind])
+    # Concatenate the inputs
+    input_x = np.vstack((fisrt_input, x[parent[i]], t_for_x[ind])).T
+    array_input_x.append(input_x)
+  return array_input_x
+
+
+
+
+def train_and_plot_neural_net(array_input_x, epsilon_for_x, array_index_for_epsilon, array_num_input_for_nn, array_titles, flag_plot_nn_train: bool = True):
   """Train the Neural Network"""
 
   # Train the neural network that will be used for the decoding process
@@ -131,17 +151,18 @@ def train_and_plot_neural_net(array_input_x, epsilon_for_x, array_index_for_epsi
 
   num_neural_net = len(array_epoch_loss)
 
-  # for loop over the neural network
-  for i in range(num_neural_net):
-    # Plot the loss over the epoch
-    fig = plt.figure()
-    ax = fig.add_subplot()
-    ax.plot(list(range(len(array_epoch_loss[i]))), array_epoch_loss[i])
-    ax.set_xlabel('number of epochs')
-    ax.set_ylabel('loss')
-    ax.set_yscale('log')
-    ax.set_title('${}$'.format(array_titles[i]))
-    fig.show()
+  if flag_plot_nn_train == True:
+    # for loop over the neural network
+    for i in range(num_neural_net):
+      # Plot the loss over the epoch
+      fig = plt.figure()
+      ax = fig.add_subplot()
+      ax.plot(list(range(len(array_epoch_loss[i]))), array_epoch_loss[i])
+      ax.set_xlabel('number of epochs')
+      ax.set_ylabel('loss')
+      ax.set_yscale('log')
+      ax.set_title('${}$'.format(array_titles[i]))
+      fig.show()
 
   return array_net_x
 
@@ -199,14 +220,14 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
   # Calculate the number of intervention values
   num_interventions = np.size(array_interventions)
 
-  # Show all the graphs and output MMD where we do(X_1 = x_1)
-  figure, axis = plt.subplots(num_interventions, 2, figsize=(10, 4.5 * num_interventions))
-
   # Initialized the array that saves the values of MMD for DCM and BDCM
   array_MMD_DCM = np.array([])
   array_MMD_BDCM = np.array([])
 
   array_MMD_DCM_BDCM = np.zeros([2, num_interventions])
+
+    # Show all the graphs and output MMD where we do(X_1 = x_1)
+  figure, axis = plt.subplots(num_interventions, 2, figsize=(10, 4.5 * num_interventions))
 
   # for loop for each intervened value
   for i in range(num_interventions):

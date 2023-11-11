@@ -49,4 +49,5 @@ for i in range(len(beta_t)):
     else:
         alpha_t[i] = (1 - beta_t[i]) * alpha_t[i - 1]
 
-        
+
+flag_plot_nn_train = False
