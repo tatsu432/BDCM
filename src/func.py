@@ -226,25 +226,37 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
 
   array_MMD_DCM_BDCM = np.zeros([2, num_interventions])
 
-    # Show all the graphs and output MMD where we do(X_1 = x_1)
-  figure, axis = plt.subplots(num_interventions, 2, figsize=(10, 4.5 * num_interventions))
-
   # for loop for each intervened value
   for i in range(num_interventions):
     # Get the intervened value
     intervened_value_for_cause_node = array_interventions[i]
+
+    # Show all the graphs and output MMD where we do(X_1 = x_1)
+    figure, axis = plt.subplots(1, 2, figsize=(12, 5))
+
     # for loop for DCM or BDCM
     for j in range(2):
       # do(X_1 = x_1)
       # Plot samples from DCM or BDCM
-      axis[i][j].hist(normalize(array_array_DCM_BDCM_samples[j][i]), 100, density = True, label = "sample")
+      axis[j].hist(normalize(array_array_DCM_BDCM_samples[j][i]), 100, density = True, label = "sample")
       # Plot ground truth samples
-      axis[i][j].hist(normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u)), 100, density = True, alpha = 0.5, label = "target dist")
-      axis[i][j].set_title("$X_{}|do(X_{} = {:.4})$ {}".format(ind_result + 1, ind_cause + 1, intervened_value_for_cause_node, array_title[j]))
-      axis[i][j].legend()
+      axis[j].hist(normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u)), 100, density = True, alpha = 0.5, label = "target dist")
+      axis[j].set_xlabel(f"$X_{ind_result + 1}|do(X_{ind_cause + 1} = {intervened_value_for_cause_node:.4})$", fontsize = 15)
+      axis[j].set_ylabel(f"frequency", fontsize = 15)
+      axis[j].set_title(f"{array_title[j]}", fontsize = 15)
+      axis[j].legend().set_visible(False)  
+      if j == 0:
+        # 凡例を中央のプロットの真上に配置する
+        figure.legend(
+                loc='upper center', 
+                bbox_to_anchor=(0.5, 1.05), 
+                ncol=2, 
+                fontsize = 15)
       # Calculate MMD
       mmd_value = MMD(torch.tensor([normalize(array_array_DCM_BDCM_samples[j][i])]).T.to(device), torch.tensor([normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u))[:conf.n_sample_DCM]]).T.to(device), "rbf")
       array_MMD_DCM_BDCM[j][i] = mmd_value.item()
+    plt.show()
+
 
   # Output the mean and standard deviation of MMD for DCM and BDCM
   # loop for DCM or BDCM
