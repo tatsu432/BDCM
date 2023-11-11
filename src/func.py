@@ -1,7 +1,10 @@
 import numpy as np
 import torch
 import random
+import matplotlib.pyplot as plt
+import conf
 
+array_title = ["DCM", "BDCM"]
 
 # Define the function to normalize
 def normalize(x):
@@ -67,29 +70,43 @@ def MMD(x, y, kernel):
 
 
 
-# Create the array that save the intervened value, samples from DCM, samples from BDCM
-# Input: array of intervened values
-# Output: DCM and BDCM samples
-def save_array(array_interventions):
-    # Get the number of interventions
-    num_intervention = np.size(array_interventions)
 
-    # Initialize the array of samples for DCM and BDCM
-    array_DCM_samples = np.array([])
-    array_BDCM_samples = np.array([])
 
-    # for each intervention
-    for i in range(num_intervention):
-      if np.any(array_DCM_samples) == False:
-        # Plot the empirical distribution of DCM and true target
-        array_DCM_samples = np.append(array_DCM_samples, np.array([sample_outcome_do_cause_DCM(array_interventions[i])]))
-        # Plot the empirical distribution of BDCM and true target
-        array_BDCM_samples = np.append(array_BDCM_samples, np.array([sample_outcome_do_cause_BDCM(array_interventions[i])]))
-      else:
-        # Plot the empirical distribution of DCM and true target
-        array_DCM_samples = np.vstack((array_DCM_samples, np.array([sample_outcome_do_cause_DCM(array_interventions[i])])))
-        # Plot the empirical distribution of BDCM and true target
-        array_BDCM_samples = np.vstack((array_BDCM_samples, np.array([sample_outcome_do_cause_BDCM(array_interventions[i])])))
-      array_array_DCM_BDCM_samples = np.array([array_DCM_samples, array_BDCM_samples])
+def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD):
+  # Calculate the number of intervention values
+  num_interventions = np.size(array_interventions)
 
-    return array_array_DCM_BDCM_samples
+  # Show all the graphs and output MMD where we do(X_1 = x_1)
+  figure, axis = plt.subplots(num_interventions, 2, figsize=(10, 4.5 * num_interventions))
+
+  # Initialized the array that saves the values of MMD for DCM and BDCM
+  array_MMD_DCM = np.array([])
+  array_MMD_BDCM = np.array([])
+
+  array_MMD_DCM_BDCM = np.zeros([2, num_interventions])
+
+  # for loop for each intervened value
+  for i in range(num_interventions):
+    # Get the intervened value
+    intervened_value_for_cause_node = array_interventions[i]
+    # for loop for DCM or BDCM
+    for j in range(2):
+      # do(X_1 = x_1)
+      # Plot samples from DCM or BDCM
+      axis[i][j].hist(normalize(array_array_DCM_BDCM_samples[j][i]), 100, density = True, label = "sample")
+      # Plot ground truth samples
+      axis[i][j].hist(normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u)), 100, density = True, alpha = 0.5, label = "target dist")
+      axis[i][j].set_title("$X_{}|do(X_{} = {:.4})$ {}".format(ind_result + 1, ind_cause + 1, intervened_value_for_cause_node, array_title[j]))
+      axis[i][j].legend()
+      # Calculate MMD
+      mmd_value = MMD(torch.tensor([normalize(array_array_DCM_BDCM_samples[j][i])]).T.to(device), torch.tensor([normalize(true_sample(d, structural_eq, ind_cause, ind_result, intervened_value_for_cause_node, array_u))[:conf.n_sample_DCM]]).T.to(device), "rbf")
+      array_MMD_DCM_BDCM[j][i] = mmd_value.item()
+
+  # Output the mean and standard deviation of MMD for DCM and BDCM
+  # loop for DCM or BDCM
+  for i in range(2):
+      print("mean of MMD for {}: {:.3}".format(array_title[i], np.mean(array_MMD_DCM_BDCM[i])))
+      print("standard deviation of MMD for {}: {:.3}".format(array_title[i], np.std(array_MMD_DCM_BDCM[i])))
+
+
+  array_array_MMD.append(array_MMD_DCM_BDCM)
