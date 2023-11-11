@@ -50,6 +50,6 @@ for i in range(len(beta_t)):
         alpha_t[i] = (1 - beta_t[i]) * alpha_t[i - 1]
 
 
-flag_plot_nn_train = False
+flag_plot_nn_train = True
 flag_print_each_MMD = True
-flag_show_plot = False
+flag_show_plot = True

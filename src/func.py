@@ -217,7 +217,7 @@ def MMD(x, y, kernel):
 
 
 
-def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD, name_of_folder, s, flag_print_each_MMD: bool = False, flag_show_plot: bool = True):
+def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, true_sample, d, structural_eq, ind_cause, ind_result, array_u, array_array_MMD, name_of_folder, s, simple_or_complex, flag_print_each_MMD: bool = False, flag_show_plot: bool = True):
   # Calculate the number of intervention values
   num_interventions = np.size(array_interventions)
 
@@ -239,7 +239,7 @@ def create_array_array_MMD(array_interventions, array_array_DCM_BDCM_samples, tr
     # resultsフォルダのパスを作成
     results_folder = os.path.join(one_levels_up, 'results')
     # results1フォルダのパスを作成
-    target_folder = os.path.join(results_folder, f'results_{name_of_folder}')
+    target_folder = os.path.join(results_folder, f'results_{name_of_folder}_{simple_or_complex}')
     # 保存先のフォルダを作成
     os.makedirs(target_folder, exist_ok=True)
 
