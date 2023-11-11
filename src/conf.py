@@ -1,15 +1,26 @@
 import numpy as np
 
-# Fast
-num_seeds = 2
-n_obs = 20   # deifne the number of samples in observational data X
-n_sample_DCM = 10  # Define the number of samples we want to approximate the target
-num_interventions = 2
+# Fastest
+num_seeds = 1
+n_obs = 100   # deifne the number of samples in observational data X
+n_sample_DCM = 100  # Define the number of samples we want to approximate the target
+num_interventions = 0
 lowest_intervention = -3
 highest_intervention = 3
 num_epochs = 5
 batch_size = 10
 learning_rate = 0.01
+
+# # Fast
+# num_seeds = 2
+# n_obs = 30   # deifne the number of samples in observational data X
+# n_sample_DCM = 10  # Define the number of samples we want to approximate the target
+# num_interventions = 2
+# lowest_intervention = -3
+# highest_intervention = 3
+# num_epochs = 5
+# batch_size = 10
+# learning_rate = 0.01
 
 # # Slow (in BDCM paper)
 # num_seeds = 5  # same as DCM paper
