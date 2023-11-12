@@ -45,6 +45,8 @@ hydra-core = "1.0.7"
 # How does BDCM perform in comparison with DCM under the existence of unmeasured confounders?
 ```
 
+<img width="400" alt="Result Table" src="results/res_table.png">
+
 #### Figure 4
 
 <img width="400" alt="Figure4" src="https://github.com/tatsu432/BDCM/assets/80372303/0c21e1e3-c95d-4953-a43b-21e59654bfab">
