@@ -121,13 +121,13 @@ SCM4_complex.ipynb
 
 ```
 # Exapmle 18 (Figure 8 and simple structural equations)
-SCM2_simple.ipynb
+SCM5_simple.ipynb
 ```
 <img width="400" alt="SCM5 simple" src="results/res_SCM5_simp.png">
 
 ```
 # Exapmle 19 (Figure 8 and complex structural equations)
-SCM2_complex.ipynb
+SCM5_complex.ipynb
 ```
 <img width="400" alt="SCM5 comlex" src="results/res_SCM5_comp.png">
 
