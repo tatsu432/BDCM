@@ -44,92 +44,113 @@ hydra-core = "1.0.7"
 ```
 # How does BDCM perform in comparison with DCM under the existence of unmeasured confounders?
 ```
-
-<img width="400" alt="Result Table" src="results/res_table.png">
+<div align="center">
+  <img width="400" alt="Result Table" src="results/res_table.png">
+</div>
 
 #### Figure 4
-
+<div align="center">
 <img width="400" alt="Figure4" src="https://github.com/tatsu432/BDCM/assets/80372303/0c21e1e3-c95d-4953-a43b-21e59654bfab">
-
+</div>
 
 ```
 # Exapmle 10 (Figure 4 and simple structural equations)
 SCM1_simple.ipynb
 ```
-
+<div align="center">
 <img width="400" alt="SCM1 simple" src="results/res_SCM1_simp.png">
+</div>
 
 ```
 # Exapmle 11 (Figure 4 and complex structural equations)
 SCM1_complex.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM1 comlex" src="results/res_SCM1_comp.png">
+</div>
 
 #### Figure 5
 
+<div align="center">
 <img width="524" alt="Figure5" src="https://github.com/tatsu432/BDCM/assets/80372303/b9bcad4a-a728-4f47-b908-261885e017c1">
-
+</div>
 
 ```
 # Exapmle 12 (Figure 5 and simple structural equations)
 SCM2_simple.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM2 simple" src="results/res_SCM2_simp.png">
+</div>
 
 ```
 # Exapmle 13 (Figure 5 and complex structural equations)
 SCM2_complex.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM2 comlex" src="results/res_SCM2_comp.png">
+</div>
 
 #### Figure 6
+<div align="center">
 <img width="400" alt="SCM3" src="https://github.com/tatsu432/BDCM/assets/80372303/38fc72cf-418e-483e-982f-f91732ffdca0">
-
+</div>
 
 
 ```
 # Exapmle 14 (Figure 6 and simple structural equations)
 SCM3_simple.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM3 simple" src="results/res_SCM3_simp.png">
-
+</div>
 
 ```
 # Exapmle 15 (Figure 6 and complex structural equations)
 SCM3_complex.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM3 comlex" src="results/res_SCM3_comp.png">
+</div>
 
 #### Figure 7
-
+<div align="center">
 <img width="400" alt="SCM4" src="https://github.com/tatsu432/BDCM/assets/80372303/fee6d0c0-b817-4545-9728-3ebf47e73d96">
-
+</div>
 
 ```
 # Exapmle 16 (Figure 7 and simple structural equations)
 SCM4_simple.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM4 simple" src="results/res_SCM4_simp.png">
+</div>
 
 ```
 # Exapmle 17 (Figure 7 and complex structural equations)
 SCM4_complex.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM4 comlex" src="results/res_SCM4_comp.png">
+</div>
 
 #### Figure 8
-
+<div align="center">
 <img width="400" alt="SCM5" src="https://github.com/tatsu432/BDCM/assets/80372303/b1cb20bf-cc96-46df-b79b-418136dbfcc3">
+</div>
 
 ```
 # Exapmle 18 (Figure 8 and simple structural equations)
 SCM5_simple.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM5 simple" src="results/res_SCM5_simp.png">
+</div>
 
 ```
 # Exapmle 19 (Figure 8 and complex structural equations)
 SCM5_complex.ipynb
 ```
+<div align="center">
 <img width="400" alt="SCM5 comlex" src="results/res_SCM5_comp.png">
-
+</div>
