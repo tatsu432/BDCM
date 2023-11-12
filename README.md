@@ -45,7 +45,7 @@ hydra-core = "1.0.7"
 # How does BDCM perform in comparison with DCM under the existence of unmeasured confounders?
 ```
 
-##### Figure 4
+#### Figure 4
 
 <img width="400" alt="Figure4" src="https://github.com/tatsu432/BDCM/assets/80372303/0c21e1e3-c95d-4953-a43b-21e59654bfab">
 
@@ -63,7 +63,7 @@ SCM1_complex.ipynb
 ```
 <img width="400" alt="SCM1 comlex" src="results/res_SCM1_comp.png">
 
-##### Figure 5
+#### Figure 5
 
 <img width="524" alt="Figure5" src="https://github.com/tatsu432/BDCM/assets/80372303/b9bcad4a-a728-4f47-b908-261885e017c1">
 
@@ -80,7 +80,7 @@ SCM2_complex.ipynb
 ```
 <img width="400" alt="SCM2 comlex" src="results/res_SCM2_comp.png">
 
-##### Figure 6
+#### Figure 6
 <img width="400" alt="SCM3" src="https://github.com/tatsu432/BDCM/assets/80372303/38fc72cf-418e-483e-982f-f91732ffdca0">
 
 
@@ -98,7 +98,7 @@ SCM3_complex.ipynb
 ```
 <img width="400" alt="SCM3 comlex" src="results/res_SCM3_comp.png">
 
-##### Figure 7
+#### Figure 7
 
 <img width="400" alt="SCM4" src="https://github.com/tatsu432/BDCM/assets/80372303/fee6d0c0-b817-4545-9728-3ebf47e73d96">
 
@@ -115,7 +115,7 @@ SCM4_complex.ipynb
 ```
 <img width="400" alt="SCM4 comlex" src="results/res_SCM4_comp.png">
 
-##### Figure 8
+#### Figure 8
 
 <img width="400" alt="SCM5" src="https://github.com/tatsu432/BDCM/assets/80372303/b1cb20bf-cc96-46df-b79b-418136dbfcc3">
 
