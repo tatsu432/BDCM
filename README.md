@@ -45,12 +45,12 @@ hydra-core = "1.0.7"
 # How does BDCM perform in comparison with DCM under the existence of unmeasured confounders?
 ```
 <div align="center">
-  <img width="400" alt="Result Table" src="results/res_table.png">
+  <img width="600" alt="Result Table" src="results/res_table.png">
 </div>
 
 #### SCM 1
 <div align="center">
-<img width="400" alt="Figure4" src="https://github.com/tatsu432/BDCM/assets/80372303/0c21e1e3-c95d-4953-a43b-21e59654bfab">
+<img width="600" alt="Figure4" src="https://github.com/tatsu432/BDCM/assets/80372303/0c21e1e3-c95d-4953-a43b-21e59654bfab">
 </div>
 
 ```
@@ -58,7 +58,7 @@ hydra-core = "1.0.7"
 SCM1_simple.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM1 simple" src="results/res_SCM1_simp.png">
+<img width="600" alt="SCM1 simple" src="results/res_SCM1_simp.png">
 </div>
 
 ```
@@ -66,13 +66,13 @@ SCM1_simple.ipynb
 SCM1_complex.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM1 comlex" src="results/res_SCM1_comp.png">
+<img width="600" alt="SCM1 comlex" src="results/res_SCM1_comp.png">
 </div>
 
 #### SCM 2
 
 <div align="center">
-<img width="524" alt="Figure5" src="https://github.com/tatsu432/BDCM/assets/80372303/b9bcad4a-a728-4f47-b908-261885e017c1">
+<img width="600" alt="Figure5" src="https://github.com/tatsu432/BDCM/assets/80372303/b9bcad4a-a728-4f47-b908-261885e017c1">
 </div>
 
 ```
@@ -80,7 +80,7 @@ SCM1_complex.ipynb
 SCM2_simple.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM2 simple" src="results/res_SCM2_simp.png">
+<img width="600" alt="SCM2 simple" src="results/res_SCM2_simp.png">
 </div>
 
 ```
@@ -88,12 +88,12 @@ SCM2_simple.ipynb
 SCM2_complex.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM2 comlex" src="results/res_SCM2_comp.png">
+<img width="600" alt="SCM2 comlex" src="results/res_SCM2_comp.png">
 </div>
 
 #### SCM 3
 <div align="center">
-<img width="400" alt="SCM3" src="https://github.com/tatsu432/BDCM/assets/80372303/38fc72cf-418e-483e-982f-f91732ffdca0">
+<img width="600" alt="SCM3" src="https://github.com/tatsu432/BDCM/assets/80372303/38fc72cf-418e-483e-982f-f91732ffdca0">
 </div>
 
 
@@ -102,7 +102,7 @@ SCM2_complex.ipynb
 SCM3_simple.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM3 simple" src="results/res_SCM3_simp.png">
+<img width="600" alt="SCM3 simple" src="results/res_SCM3_simp.png">
 </div>
 
 ```
@@ -110,12 +110,12 @@ SCM3_simple.ipynb
 SCM3_complex.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM3 comlex" src="results/res_SCM3_comp.png">
+<img width="600" alt="SCM3 comlex" src="results/res_SCM3_comp.png">
 </div>
 
 #### SCM 4
 <div align="center">
-<img width="400" alt="SCM4" src="https://github.com/tatsu432/BDCM/assets/80372303/fee6d0c0-b817-4545-9728-3ebf47e73d96">
+<img width="600" alt="SCM4" src="https://github.com/tatsu432/BDCM/assets/80372303/fee6d0c0-b817-4545-9728-3ebf47e73d96">
 </div>
 
 ```
@@ -123,7 +123,7 @@ SCM3_complex.ipynb
 SCM4_simple.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM4 simple" src="results/res_SCM4_simp.png">
+<img width="600" alt="SCM4 simple" src="results/res_SCM4_simp.png">
 </div>
 
 ```
@@ -131,12 +131,12 @@ SCM4_simple.ipynb
 SCM4_complex.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM4 comlex" src="results/res_SCM4_comp.png">
+<img width="600" alt="SCM4 comlex" src="results/res_SCM4_comp.png">
 </div>
 
 #### SCM 5
 <div align="center">
-<img width="400" alt="SCM5" src="https://github.com/tatsu432/BDCM/assets/80372303/b1cb20bf-cc96-46df-b79b-418136dbfcc3">
+<img width="600" alt="SCM5" src="https://github.com/tatsu432/BDCM/assets/80372303/b1cb20bf-cc96-46df-b79b-418136dbfcc3">
 </div>
 
 ```
@@ -144,7 +144,7 @@ SCM4_complex.ipynb
 SCM5_simple.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM5 simple" src="results/res_SCM5_simp.png">
+<img width="600" alt="SCM5 simple" src="results/res_SCM5_simp.png">
 </div>
 
 ```
@@ -152,5 +152,5 @@ SCM5_simple.ipynb
 SCM5_complex.ipynb
 ```
 <div align="center">
-<img width="400" alt="SCM5 comlex" src="results/res_SCM5_comp.png">
+<img width="600" alt="SCM5 comlex" src="results/res_SCM5_comp.png">
 </div>
