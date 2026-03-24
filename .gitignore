@@ -3,6 +3,7 @@
 
 results/
 README_example.md
+.python-version
 
 # Hydra
 outputs/

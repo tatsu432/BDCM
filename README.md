@@ -2,6 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-%3E%3D3.12-blue" alt="Python" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-526EAF.svg?logo=opensourceinitiative&logoColor=white" alt="License: MIT" /></a>
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" /></a>
   <a href="https://arxiv.org/abs/2308.03669"><img src="https://img.shields.io/badge/paper-arxiv.2308.03669-B31B1B.svg" alt="arXiv" /></a>
   <a href="https://attend.ieee.org/ssci-2023/"><img src="https://img.shields.io/badge/IEEE-SSCI%202023-00629B.svg" alt="IEEE SSCI 2023" /></a>
 </p>
