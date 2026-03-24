@@ -1,6 +1,13 @@
 # macOS
 .DS_Store
 
+results/
+README_example.md
+
+# Hydra
+outputs/
+multirun/
+
 # Project-specific
 TSR/
 prac/

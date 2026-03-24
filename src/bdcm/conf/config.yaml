@@ -1,0 +1,7 @@
+defaults:
+  - experiment: paper
+  - _self_
+
+# Which synthetic graph and structural regime to run (override on CLI, e.g. scm=2 variant=complex)
+scm: 1
+variant: simple

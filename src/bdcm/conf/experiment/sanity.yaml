@@ -1,0 +1,18 @@
+# Fast run for CI / smoke tests (no blocking plots).
+num_seeds: 1
+n_obs: 32
+n_sample_dcm: 16
+num_interventions: 2
+lowest_intervention: -1.0
+highest_intervention: 1.0
+num_epochs: 2
+batch_size: 8
+learning_rate: 0.01
+mu: 0.0
+sigma: 1.0
+schedule:
+  T: 12
+flags:
+  plot_nn_train: false
+  print_each_mmd: false
+  show_plot: false

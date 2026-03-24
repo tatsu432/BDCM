@@ -1,0 +1,18 @@
+# Full hyperparameters aligned with the BDCM paper-style experiments.
+num_seeds: 5
+n_obs: 1000
+n_sample_dcm: 500
+num_interventions: 10
+lowest_intervention: -3.0
+highest_intervention: 3.0
+num_epochs: 500
+batch_size: 64
+learning_rate: 0.0001
+mu: 0.0
+sigma: 1.0
+schedule:
+  T: 100
+flags:
+  plot_nn_train: true
+  print_each_mmd: true
+  show_plot: true
