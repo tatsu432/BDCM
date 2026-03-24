@@ -16,25 +16,3 @@ We study how to extend the use of the diffusion model to answer the causal quest
   year={2023}
 }
 ```
-
-
-## Requirements and Setup
-```bash
-# clone the repository
-git clone https://github.com/tatsu432/BDCM
-```
-
-The versions of Python and necessary packages are specified as follows.
-
-```
-[tool.poetry.dependencies]
-python = ">=3.9,<3.10"
-obp = "0.5.5"
-scikit-learn = "1.0.2"
-pandas = "1.3.5"
-scipy = "1.7.3"
-numpy = "^1.22.4"
-matplotlib = "^3.5.2"
-seaborn = "^0.11.2"
-hydra-core = "1.0.7"
-```
