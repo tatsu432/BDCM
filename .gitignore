@@ -6,7 +6,7 @@ TSR/
 prac/
 
 # Byte-compiled / optimized
-__pycache__/
+*__pycache__/
 *.py[cod]
 *$py.class
 *.so

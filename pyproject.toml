@@ -1,0 +1,11 @@
+[project]
+name = "bdcm"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.3",
+    "torch>=2.11.0",
+]
