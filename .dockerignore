@@ -1,0 +1,27 @@
+# VCS and editor
+.git
+.github
+.idea
+.vscode
+
+# Python / tooling
+.venv
+venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.egg-info
+.eggs
+dist
+build
+
+# Local artifacts (recreated in container)
+results
+outputs
+multirun
+
+# Optional / large
+README_example.md
+*.md~

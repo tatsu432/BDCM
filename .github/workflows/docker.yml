@@ -1,0 +1,17 @@
+name: Docker
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t bdcm:ci .
+
+      - name: Smoke run (sanity preset)
+        run: docker run --rm bdcm:ci experiment=sanity scm=1 variant=simple

@@ -1,0 +1,13 @@
+# Persist results/outputs on the host and pass Hydra overrides:
+#   docker compose run --rm bdcm experiment=preview scm=2
+
+services:
+  bdcm:
+    build: .
+    image: bdcm:local
+    # Headless matplotlib
+    environment:
+      MPLBACKEND: Agg
+    volumes:
+      - ./results:/app/results
+      - ./outputs:/app/outputs

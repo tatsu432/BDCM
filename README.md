@@ -14,7 +14,9 @@ Code for the paper [Diffusion Model in Causal Inference with Unmeasured Confound
 
 | Resource | Description |
 |----------|-------------|
-| This README | Install, Hydra CLI, Python API, tests |
+| This README | Install, Docker, Hydra CLI, Python API, tests |
+| [`Dockerfile`](Dockerfile) | Reproducible CPU image (editable install → `/app/results`) |
+| [`compose.yaml`](compose.yaml) | Compose service with host-mounted `results/` and `outputs/` |
 | [`src/bdcm/conf/config.yaml`](src/bdcm/conf/config.yaml) | App defaults (`scm`, `variant`, …) |
 | [`src/bdcm/conf/experiment/`](src/bdcm/conf/experiment/) | Presets: `paper`, `sanity`, `preview` |
 | [`tests/`](tests/) | `pytest` suite (unit + optional integration) |
@@ -38,6 +40,32 @@ python -m bdcm.experiments experiment=sanity scm=1 variant=simple
 ```
 
 Hydra writes under `outputs/` (gitignored). Multirun: `python -m bdcm.experiments -m experiment=paper,sanity`.
+
+## Docker
+
+Reproducible environment (Python 3.12, CPU PyTorch, headless Matplotlib). The image uses an **editable** install under `/app` so `bdcm.config` resolves `results/` to `/app/results` (not site-packages).
+
+**Build and run (CLI):**
+
+```bash
+docker build -t bdcm:local .
+docker run --rm -v "$(pwd)/results:/app/results" -v "$(pwd)/outputs:/app/outputs" bdcm:local experiment=sanity scm=1 variant=simple
+```
+
+Override Hydra args by appending to `docker run` after the image name (they replace the image `CMD` but not `ENTRYPOINT`).
+
+**Compose** (same volume layout as above):
+
+```bash
+docker compose build
+docker compose run --rm bdcm experiment=preview scm=2 variant=simple
+```
+
+**Practices in this setup:** slim base image, non-root user (`bdcm`, uid `10001`), `MPLBACKEND=Agg` for servers/CI, minimal `.dockerignore`, and a CI job that **builds the image and runs a sanity experiment** ([`.github/workflows/docker.yml`](.github/workflows/docker.yml)).
+
+**Build time:** The first `docker build` downloads the base image and Python wheels. If you ever saw ~10+ minutes, it was likely **`pip install torch` from PyPI pulling CUDA/cuDNN** (hundreds of MB). The `Dockerfile` installs **CPU-only** PyTorch from `download.pytorch.org/whl/cpu` first so later `pip install -e .` does not replace it; rebuilds should be much faster once layers are cached.
+
+For GPU or CUDA wheels, extend the `Dockerfile` with an NVIDIA base image and matching PyTorch index; the current file targets **CPU** only.
 
 ## Experiment presets
 
