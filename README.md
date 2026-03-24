@@ -14,9 +14,6 @@ Code for the paper [Diffusion Model in Causal Inference with Unmeasured Confound
 
 | Resource | Description |
 |----------|-------------|
-| This README | Install, Docker, Hydra CLI, Python API, tests |
-| [`Dockerfile`](Dockerfile) | Reproducible CPU image (editable install → `/app/results`) |
-| [`compose.yaml`](compose.yaml) | Compose service with host-mounted `results/` and `outputs/` |
 | [`src/bdcm/conf/config.yaml`](src/bdcm/conf/config.yaml) | App defaults (`scm`, `variant`, …) |
 | [`src/bdcm/conf/experiment/`](src/bdcm/conf/experiment/) | Presets: `paper`, `sanity`, `preview` |
 | [`tests/`](tests/) | `pytest` suite (unit + optional integration) |
@@ -60,10 +57,6 @@ Override Hydra args by appending to `docker run` after the image name (they repl
 docker compose build
 docker compose run --rm bdcm experiment=preview scm=2 variant=simple
 ```
-
-**Practices in this setup:** slim base image, non-root user (`bdcm`, uid `10001`), `MPLBACKEND=Agg` for servers/CI, minimal `.dockerignore`, and a CI job that **builds the image and runs a sanity experiment** ([`.github/workflows/docker.yml`](.github/workflows/docker.yml)).
-
-**Build time:** The first `docker build` downloads the base image and Python wheels. If you ever saw ~10+ minutes, it was likely **`pip install torch` from PyPI pulling CUDA/cuDNN** (hundreds of MB). The `Dockerfile` installs **CPU-only** PyTorch from `download.pytorch.org/whl/cpu` first so later `pip install -e .` does not replace it; rebuilds should be much faster once layers are cached.
 
 For GPU or CUDA wheels, extend the `Dockerfile` with an NVIDIA base image and matching PyTorch index; the current file targets **CPU** only.
 
@@ -119,7 +112,6 @@ uv run pytest
 - **Fast:** `pytest -m "not integration"` — schedules, presets, MMD, structural SCMs, sampling, validation.
 - **Integration:** `tests/test_integration_smoke.py` (trains briefly); marked `@pytest.mark.integration`.
 
-**Lint (local):** `uv run ruff check src tests` and `uv run mypy src/bdcm tests`. Every push and pull request runs the same checks via [`.github/workflows/lint.yml`](.github/workflows/lint.yml).
 
 ## Related work
 
