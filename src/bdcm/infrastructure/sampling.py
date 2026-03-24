@@ -23,7 +23,9 @@ def sample_array_u_and_x(
     return array_u, x
 
 
-def sample_t_and_eps_for_x(d: int, config: ExperimentConfig) -> tuple[np.ndarray, np.ndarray]:
+def sample_t_and_eps_for_x(
+    d: int, config: ExperimentConfig
+) -> tuple[np.ndarray, np.ndarray]:
     T = config.schedule.T
     t_rows = [
         np.array([random.randint(1, T) for _ in range(config.n_obs)], dtype=np.int64)

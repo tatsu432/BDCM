@@ -38,7 +38,9 @@ def create_alpha_t_train_for_x(
     return alpha_t_train_for_x
 
 
-def create_input_1(alpha_t: np.ndarray, x: np.ndarray, epsilon: np.ndarray) -> np.ndarray:
+def create_input_1(
+    alpha_t: np.ndarray, x: np.ndarray, epsilon: np.ndarray
+) -> np.ndarray:
     return np.sqrt(alpha_t) * x + np.sqrt(1 - alpha_t) * epsilon
 
 
@@ -63,13 +65,11 @@ def dec(
         with torch.no_grad():
             output_x_tensor = array_net_x[index_order](input_x_tensor)
         output_x = output_x_tensor.detach().cpu().numpy()
-        x_hat[t - 1] = (
-            np.sqrt(alpha_t[t - 2] / alpha_t[t - 1]) * x_hat[t]
-            - output_x[0, 0]
-            * (
-                np.sqrt(alpha_t[t - 2] * (1 - alpha_t[t - 1]) / alpha_t[t - 1])
-                - np.sqrt(1 - alpha_t[t - 2])
-            )
+        x_hat[t - 1] = np.sqrt(alpha_t[t - 2] / alpha_t[t - 1]) * x_hat[t] - output_x[
+            0, 0
+        ] * (
+            np.sqrt(alpha_t[t - 2] * (1 - alpha_t[t - 1]) / alpha_t[t - 1])
+            - np.sqrt(1 - alpha_t[t - 2])
         )
     return float(x_hat[0])
 

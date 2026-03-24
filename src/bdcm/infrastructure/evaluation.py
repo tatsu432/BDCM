@@ -126,7 +126,9 @@ def calculate_overall_mmd(
     stacked_bdcm = np.concatenate(all_mmd_bdcm)
     for j, series in enumerate((stacked_dcm, stacked_bdcm)):
         print(
-            "mean of all MMD for {}: {:.3}".format(METHOD_TITLES[j], float(np.mean(series)))
+            "mean of all MMD for {}: {:.3}".format(
+                METHOD_TITLES[j], float(np.mean(series))
+            )
         )
         print(
             "standard deviation of all MMD for {}: {:.3}".format(

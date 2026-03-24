@@ -89,6 +89,8 @@ uv run pytest
 - **Fast:** `pytest -m "not integration"` — schedules, presets, MMD, structural SCMs, sampling, validation.
 - **Integration:** `tests/test_integration_smoke.py` (trains briefly); marked `@pytest.mark.integration`.
 
+**Lint (local):** `uv run ruff check src tests` and `uv run mypy src/bdcm tests`. Every push and pull request runs the same checks via [`.github/workflows/lint.yml`](.github/workflows/lint.yml).
+
 ## Related work
 
 - [Diffusion-based Causal Model (DCM)](https://arxiv.org/abs/2302.00860) — observed confounders setting.

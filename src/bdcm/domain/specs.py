@@ -76,9 +76,7 @@ SCM5_SPEC = SCMExperimentSpec(
     d=11,
     ind_cause=8,
     ind_result=10,
-    array_titles=np.array(
-        ["X_{10}", "X_{11} (DCM)", "X_{11} (BDCM)"], dtype=object
-    ),
+    array_titles=np.array(["X_{10}", "X_{11} (DCM)", "X_{11} (BDCM)"], dtype=object),
     array_index_for_epsilon=np.array([9, 10, 10]),
     array_num_input_for_nn=np.array([3, 4, 6]),
     parent=[[8], [8, 9], [1, 5, 8, 9]],

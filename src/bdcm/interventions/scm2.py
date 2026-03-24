@@ -46,7 +46,7 @@ def sample_outcome_do_cause_bdcm(
         x3_sampled = random.choice(x[2])
         x4_sampled = intervened_value
         x5_parents = np.array([x3_sampled])
-        x5_sampled = dec(x5_parents, 0, nets, schedule)
+        _ = dec(x5_parents, 0, nets, schedule)
         x6_parents = np.array([x3_sampled, x4_sampled])
         out[i] = dec(x6_parents, 2, nets, schedule)
     return out

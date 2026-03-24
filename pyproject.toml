@@ -15,7 +15,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = [
+    "mypy>=1.11",
+    "pytest>=8.0",
+    "ruff>=0.8",
+    "types-tqdm>=4.67",
+]
 
 [build-system]
 requires = ["setuptools>=61"]
@@ -25,7 +30,7 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.setuptools.package-data]
-bdcm = ["conf/**/*.yaml"]
+bdcm = ["conf/**/*.yaml", "py.typed"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -34,3 +39,28 @@ addopts = "-ra"
 markers = [
     "integration: trains models and writes results (slower than unit tests)",
 ]
+
+[tool.ruff]
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# Keep CI focused on correctness; extend with "I", "UP" locally if you want isort/pyupgrade.
+select = ["E", "F", "W"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+explicit_package_bases = true
+warn_unused_configs = true
+show_error_codes = true
+# Third-party without stubs or partial stubs
+[[tool.mypy.overrides]]
+module = [
+    "hydra.*",
+    "matplotlib.*",
+    "omegaconf.*",
+    "torch.*",
+]
+ignore_missing_imports = true

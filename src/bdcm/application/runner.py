@@ -15,8 +15,16 @@ from bdcm.infrastructure.diffusion import (
     create_input_for_NN,
     set_seed,
 )
-from bdcm.infrastructure.evaluation import append_mmd_plots, calculate_overall_mmd, save_array
-from bdcm.infrastructure.sampling import sample_array_u_and_x, sample_t_and_eps_for_x, true_sample
+from bdcm.infrastructure.evaluation import (
+    append_mmd_plots,
+    calculate_overall_mmd,
+    save_array,
+)
+from bdcm.infrastructure.sampling import (
+    sample_array_u_and_x,
+    sample_t_and_eps_for_x,
+    true_sample,
+)
 from bdcm.infrastructure.training import train_neural_nets
 
 StructuralEq = Callable[[np.ndarray, int, np.ndarray], np.ndarray]

@@ -54,7 +54,9 @@ class ExperimentConfig:
     learning_rate: float = 0.0001
     mu: float = 0.0
     sigma: float = 1.0
-    schedule: DiffusionSchedule = field(default_factory=lambda: build_diffusion_schedule(100))
+    schedule: DiffusionSchedule = field(
+        default_factory=lambda: build_diffusion_schedule(100)
+    )
     flags: ExperimentFlags = field(default_factory=ExperimentFlags)
     results_root: Path = field(default_factory=lambda: _repo_root() / "results")
 

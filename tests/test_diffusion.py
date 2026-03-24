@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import numpy as np
-import pytest
 
 from bdcm.config import build_diffusion_schedule
 from bdcm.infrastructure.diffusion import create_input_1, create_input_for_NN, normalize

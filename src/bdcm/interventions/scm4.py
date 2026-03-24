@@ -27,7 +27,7 @@ def sample_outcome_do_cause_dcm(
         x7_parents = np.array([x3_sampled])
         x7_sampled = dec(x7_parents, 0, nets, schedule)
         x8_parents = np.array([x4_sampled])
-        x8_sampled = dec(x8_parents, 1, nets, schedule)
+        _ = dec(x8_parents, 1, nets, schedule)
         x9_sampled = intervened_value
         x10_parents = np.array([x7_sampled, x9_sampled])
         out[i] = dec(x10_parents, 2, nets, schedule)
@@ -47,9 +47,9 @@ def sample_outcome_do_cause_bdcm(
         x3_sampled = random.choice(x[2])
         x4_sampled = random.choice(x[3])
         x7_parents = np.array([x3_sampled])
-        x7_sampled = dec(x7_parents, 0, nets, schedule)
+        _ = dec(x7_parents, 0, nets, schedule)
         x8_parents = np.array([x4_sampled])
-        x8_sampled = dec(x8_parents, 1, nets, schedule)
+        _ = dec(x8_parents, 1, nets, schedule)
         x9_sampled = intervened_value
         x10_parents = np.array([x3_sampled, x4_sampled, x9_sampled])
         out[i] = dec(x10_parents, 3, nets, schedule)

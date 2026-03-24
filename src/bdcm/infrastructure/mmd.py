@@ -3,7 +3,9 @@ from __future__ import annotations
 import torch
 
 
-def mmd(x: torch.Tensor, y: torch.Tensor, kernel: str, device: torch.device) -> torch.Tensor:
+def mmd(
+    x: torch.Tensor, y: torch.Tensor, kernel: str, device: torch.device
+) -> torch.Tensor:
     """Empirical maximum mean discrepancy (same kernels as original)."""
     x = x.to(device)
     y = y.to(device)
